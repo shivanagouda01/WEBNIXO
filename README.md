@@ -1,11 +1,24 @@
-<div align="center">
+# Webnixo Website
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+Professional web development business website.
 
-  <h1>Built with AI Studio</h2>
+## Deployment on Vercel
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+This project is optimized for Vercel deployment.
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+### Steps:
+1. **Push to GitHub**: Upload your code to a GitHub repository.
+2. **Import to Vercel**: Go to [Vercel](https://vercel.com), click "Add New" > "Project", and select your repository.
+3. **Configure**:
+   - **Framework Preset**: Vite (automatically detected).
+   - **Build Command**: `npm run build`.
+   - **Output Directory**: `dist`.
+4. **Environment Variables**:
+   - If you use the Gemini AI features, add `GEMINI_API_KEY` in the Vercel project settings under "Environment Variables".
+5. **Deploy**: Click "Deploy" and your site will be live!
 
-</div>
+### Local Development
+```bash
+npm install
+npm run dev
+```
