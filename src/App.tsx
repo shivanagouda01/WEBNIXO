@@ -60,6 +60,42 @@ const Reveal = ({ children, delay = 0 }: { children: React.ReactNode, delay?: nu
   );
 };
 
+const InfoTicker = () => {
+  const items = [
+    "🚀 Modern Websites for Modern Businesses",
+    "✨ 100+ Successful Projects Delivered",
+    "📱 100% Mobile Responsive Designs",
+    "⚡ Ultra-Fast Loading Speeds",
+    "🛠️ 24/7 Priority Support",
+    "📈 Conversion Optimized Layouts",
+    "🔒 Secure & SSL Certified",
+  ];
+
+  return (
+    <div className="bg-slate-950 py-4 overflow-hidden border-y border-white/5 relative z-20 shadow-2xl">
+      <motion.div
+        animate={{ x: [0, -1000] }}
+        transition={{
+          duration: 40,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+        className="flex whitespace-nowrap gap-16 items-center"
+      >
+        {[...items, ...items, ...items].map((item, index) => (
+          <span
+            key={index}
+            className="text-brand-400/80 text-xs font-black uppercase tracking-[0.4em] flex items-center gap-3"
+          >
+            <span className="w-2 h-2 bg-brand-500 rounded-full shadow-[0_0_10px_rgba(59,130,246,0.5)]" />
+            {item}
+          </span>
+        ))}
+      </motion.div>
+    </div>
+  );
+};
+
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -215,6 +251,30 @@ const Hero = () => {
           <Zap size={120} />
         </motion.div>
 
+        {/* Extra Floating Elements */}
+        <motion.div
+          animate={{ 
+            y: [0, -40, 0], 
+            x: [0, 20, 0],
+            rotate: [0, -20, 0] 
+          }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/4 right-10 text-brand-400 opacity-10 hidden lg:block"
+        >
+          <Globe size={80} />
+        </motion.div>
+        <motion.div
+          animate={{ 
+            y: [0, 40, 0], 
+            x: [0, -20, 0],
+            rotate: [0, 20, 0] 
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-1/4 left-10 text-blue-400 opacity-10 hidden lg:block"
+        >
+          <Smartphone size={70} />
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -224,15 +284,15 @@ const Hero = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-50 text-brand-700 text-sm font-bold mb-6 border border-brand-100 shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-50/80 backdrop-blur-sm text-brand-700 text-sm font-bold mb-6 border border-brand-100 shadow-sm"
           >
-            <Award size={16} /> Smart Websites. Real Growth.
+            <Award size={16} className="animate-pulse" /> Smart Websites. Real Growth.
           </motion.div>
           
           <h1 className="text-5xl lg:text-8xl font-display font-bold tracking-tight mb-8 leading-[1.05]">
             <Reveal delay={0.3}>We Build Modern Websites</Reveal>
             <Reveal delay={0.5}>
-              That <span className="text-gradient">Grow Your Business 🚀</span>
+              That <span className="text-gradient animate-gradient">Grow Your Business 🚀</span>
             </Reveal>
           </h1>
           
@@ -269,6 +329,23 @@ const Hero = () => {
               <MessageSquare size={24} className="text-brand-600" />
               Chat on WhatsApp
             </motion.a>
+          </motion.div>
+        </motion.div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+          className="mt-24 flex flex-col items-center gap-2"
+        >
+          <span className="text-xs font-bold text-slate-400 uppercase tracking-[0.3em]">Scroll to Explore</span>
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="w-5 h-8 border-2 border-slate-200 rounded-full flex justify-center p-1"
+          >
+            <div className="w-1 h-2 bg-brand-500 rounded-full" />
           </motion.div>
         </motion.div>
 
@@ -342,24 +419,30 @@ const Services = () => {
               key={service.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ y: -5, borderColor: "var(--color-brand-400)" }}
+              whileHover={{ 
+                y: -10, 
+                borderColor: "var(--color-brand-400)",
+                boxShadow: "0 20px 40px rgba(59,130,246,0.15)"
+              }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className={`p-8 rounded-3xl border border-slate-100 hover:shadow-2xl hover:shadow-brand-100 transition-all group ${service.main ? "lg:col-span-1 bg-brand-50/30" : "bg-white"} ${service.small ? "opacity-90" : ""}`}
+              className={`p-8 rounded-[2.5rem] border border-slate-100 transition-all group ${service.main ? "lg:col-span-2 bg-brand-50/30" : "bg-white"} ${service.small ? "opacity-90" : ""}`}
             >
-              <div className="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                {service.icon}
+              <div className="flex flex-col h-full">
+                <div className="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform">
+                  {service.icon}
+                </div>
+                <h3 className="text-2xl font-display font-bold mb-4 group-hover:text-brand-600 transition-colors">{service.title}</h3>
+                <p className="text-slate-600 mb-6 leading-relaxed flex-grow">{service.description}</p>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {service.features.map(feature => (
+                    <li key={feature} className="flex items-center gap-2 text-sm font-medium text-slate-700">
+                      <CheckCircle2 size={16} className="text-brand-500" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <h3 className="text-2xl font-display font-bold mb-4">{service.title}</h3>
-              <p className="text-slate-600 mb-6 leading-relaxed">{service.description}</p>
-              <ul className="space-y-3">
-                {service.features.map(feature => (
-                  <li key={feature} className="flex items-center gap-2 text-sm font-medium text-slate-700">
-                    <CheckCircle2 size={16} className="text-brand-500" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
             </motion.div>
           ))}
         </div>
@@ -392,27 +475,37 @@ const WhyUs = () => {
           <p className="text-4xl lg:text-6xl font-display font-bold text-slate-900 mb-8 leading-tight">We Don't Just Build Websites, We Build Success Stories</p>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {reasons.map((reason, index) => (
             <motion.div 
               key={reason.title} 
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ y: -10, backgroundColor: "#ffffff" }}
+              whileHover={{ 
+                y: -12, 
+                backgroundColor: "#ffffff",
+                boxShadow: "0 30px 60px -12px rgba(50,50,93,0.1), 0 18px 36px -18px rgba(0,0,0,0.15)"
+              }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.05 }}
-              className="flex flex-col gap-4 p-8 bg-white/50 rounded-[2.5rem] border border-slate-100 hover:shadow-2xl hover:shadow-brand-100/50 transition-all group"
+              transition={{ 
+                delay: index * 0.05,
+                type: "spring",
+                stiffness: 100
+              }}
+              className="flex flex-col gap-6 p-10 bg-white/40 backdrop-blur-sm rounded-[3rem] border border-white/60 transition-all group relative overflow-hidden"
             >
+              <div className="absolute top-0 right-0 w-24 h-24 bg-brand-500/5 rounded-full -mr-12 -mt-12 group-hover:scale-150 transition-transform duration-700" />
+              
               <motion.div 
                 whileHover={{ rotate: 360, scale: 1.1 }}
-                transition={{ duration: 0.5 }}
-                className="w-14 h-14 bg-brand-600 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-brand-200"
+                transition={{ duration: 0.8, ease: "anticipate" }}
+                className="w-16 h-16 bg-brand-600 text-white rounded-[1.25rem] flex items-center justify-center shadow-xl shadow-brand-200 group-hover:shadow-brand-400/40 transition-all"
               >
-                {reason.icon}
+                {React.cloneElement(reason.icon as React.ReactElement, { size: 28 })}
               </motion.div>
               <div>
-                <h4 className="text-xl font-bold text-slate-900 mb-2">{reason.title}</h4>
-                <p className="text-sm text-slate-500 leading-relaxed">{reason.desc}</p>
+                <h4 className="text-2xl font-display font-bold text-slate-900 mb-3 group-hover:text-brand-600 transition-colors">{reason.title}</h4>
+                <p className="text-slate-500 leading-relaxed font-medium">{reason.desc}</p>
               </div>
             </motion.div>
           ))}
@@ -535,73 +628,79 @@ const CEOSection = () => {
     <section className="py-40 bg-slate-950 text-white overflow-hidden relative">
       {/* Crazy Background Effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
+        {[...Array(30)].map((_, i) => (
           <motion.div
             key={i}
             animate={{
-              y: [0, -1000],
-              x: Math.random() * 100 - 50,
-              opacity: [0, 1, 0],
+              y: [0, -1200],
+              x: Math.random() * 200 - 100,
+              opacity: [0, 0.8, 0],
+              scale: [1, 1.5, 1],
             }}
             transition={{
-              duration: Math.random() * 10 + 5,
+              duration: Math.random() * 8 + 4,
               repeat: Infinity,
               ease: "linear",
-              delay: Math.random() * 10,
+              delay: Math.random() * 5,
             }}
-            className="absolute bottom-0 w-1 h-1 bg-brand-500 rounded-full"
+            className="absolute bottom-0 w-1 h-1 bg-brand-500 rounded-full blur-[1px]"
             style={{ left: `${Math.random() * 100}%` }}
           />
         ))}
-        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-brand-600 rounded-full blur-[150px] animate-pulse" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-blue-600 rounded-full blur-[150px] animate-pulse" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-brand-600/20 rounded-full blur-[150px] animate-pulse" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-blue-600/20 rounded-full blur-[150px] animate-pulse" style={{ animationDelay: '2s' }} />
       </div>
 
       <div className="max-w-5xl mx-auto px-6 relative z-10 text-center">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-brand-500/10 text-brand-400 text-sm font-bold mb-12 border border-brand-500/20 tracking-[0.3em]">
-            THE VISIONARY
+          <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-brand-500/10 text-brand-400 text-xs font-black mb-12 border border-brand-500/20 tracking-[0.5em] uppercase">
+            <span className="w-2 h-2 bg-brand-500 rounded-full animate-ping" />
+            The Visionary
           </div>
           
-          <div className="relative mb-16">
-            <div className="absolute -left-10 -top-10 text-9xl text-brand-500/10 font-serif">"</div>
-            <h2 className="text-4xl lg:text-6xl font-display font-bold italic leading-tight text-slate-200">
-              We don't just write code; we architect <span className="text-brand-500">digital empires</span>. 
+          <div className="relative mb-20">
+            <div className="absolute -left-10 -top-16 text-[12rem] text-brand-500/5 font-serif select-none">"</div>
+            <h2 className="text-4xl lg:text-7xl font-display font-bold italic leading-[1.1] text-slate-100 tracking-tight">
+              We don't just write code; we architect <span className="text-gradient animate-gradient">digital empires</span>. 
               If your website isn't making you money while you sleep, it's just a digital business card. 
-              <span className="text-white block mt-6">Let's build a machine.</span>
+              <span className="text-white block mt-8 not-italic font-black text-2xl lg:text-3xl tracking-widest uppercase">Let's build a machine.</span>
             </h2>
-            <div className="absolute -right-10 -bottom-10 text-9xl text-brand-500/10 font-serif rotate-180">"</div>
+            <div className="absolute -right-10 -bottom-16 text-[12rem] text-brand-500/5 font-serif rotate-180 select-none">"</div>
           </div>
 
           <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
             className="flex flex-col items-center"
           >
-            <div className="w-24 h-1 bg-gradient-to-r from-transparent via-brand-500 to-transparent mb-8" />
-            <h3 className="text-4xl lg:text-5xl font-display font-bold text-white tracking-widest mb-2">SHIVANAGOUDA PATIL</h3>
-            <p className="text-brand-500 font-bold uppercase tracking-[0.4em] text-sm">Founder & CEO, Webnixo</p>
+            <div className="w-32 h-1 bg-gradient-to-r from-transparent via-brand-500 to-transparent mb-10" />
+            <h3 className="text-4xl lg:text-6xl font-display font-black text-white tracking-tighter mb-4">SHIVANAGOUDA PATIL</h3>
+            <p className="text-brand-500 font-bold uppercase tracking-[0.6em] text-xs lg:text-sm">Founder & CEO, Webnixo</p>
           </motion.div>
           
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
-            className="mt-20"
+            className="mt-24"
           >
             <motion.a
-              whileHover={{ scale: 1.1, boxShadow: "0 0 50px rgba(59,130,246,0.6)" }}
-              whileTap={{ scale: 0.9 }}
+              whileHover={{ 
+                scale: 1.05, 
+                boxShadow: "0 0 80px rgba(59,130,246,0.4)",
+                y: -5
+              }}
+              whileTap={{ scale: 0.95 }}
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block bg-white text-slate-950 px-16 py-6 rounded-full font-black text-2xl tracking-tighter hover:bg-brand-50 transition-all shadow-2xl"
+              className="inline-block bg-white text-slate-950 px-20 py-8 rounded-full font-black text-2xl tracking-tighter hover:bg-brand-50 transition-all shadow-[0_20px_50px_rgba(255,255,255,0.1)]"
             >
               START THE REVOLUTION
             </motion.a>
@@ -706,66 +805,73 @@ const Testimonials = () => {
 
 const Contact = () => {
   return (
-    <section id="contact" className="py-24 bg-brand-600 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-brand-500 to-transparent opacity-50" />
+    <section id="contact" className="py-32 bg-slate-50 relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-brand-100/40 via-transparent to-transparent pointer-events-none" />
       
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="bg-white rounded-[40px] p-10 lg:p-24 shadow-2xl text-center">
+        <div className="bg-white rounded-[4rem] p-12 lg:p-24 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.05)] border border-slate-100 text-center relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-brand-500/5 rounded-full blur-3xl -mr-32 -mt-32" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl -ml-32 -mb-32" />
+
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl lg:text-6xl font-display font-bold text-slate-900 mb-8 leading-tight">
-              Let’s Build Your <br className="hidden md:block" /> <span className="text-gradient">Dream Website Today</span>
+            <h2 className="text-4xl lg:text-7xl font-display font-black text-slate-900 mb-8 leading-[1.1] tracking-tight">
+              Let’s Build Your <br className="hidden md:block" /> <span className="text-gradient animate-gradient">Digital Empire Today</span>
             </h2>
-            <p className="text-xl text-slate-600 mb-12 max-w-2xl mx-auto leading-relaxed">
-              Ready to take your business to the next level? Contact us now and let's start your project. 
-              We're excited to hear about your vision!
+            <p className="text-xl text-slate-500 mb-16 max-w-2xl mx-auto leading-relaxed font-medium">
+              Ready to dominate your market? Contact us now and let's start your journey to the top. 
+              Your vision, our expertise.
             </p>
             
-            <div className="flex flex-col md:flex-row items-center justify-center gap-8 mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20 max-w-4xl mx-auto">
               <motion.a 
-                whileHover={{ scale: 1.05, y: -5 }}
+                whileHover={{ scale: 1.02, y: -5 }}
                 href={WHATSAPP_LINK} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex items-center gap-6 p-6 rounded-3xl bg-brand-50 border border-brand-100 group hover:bg-brand-100 transition-all w-full md:w-auto min-w-[320px]"
+                className="flex items-center gap-8 p-8 rounded-[2.5rem] bg-brand-50/50 border border-brand-100 group hover:bg-white hover:shadow-2xl hover:shadow-brand-200/40 transition-all"
               >
-                <div className="w-16 h-16 bg-brand-600 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-brand-200">
-                  <MessageSquare size={32} />
+                <div className="w-20 h-20 bg-brand-600 text-white rounded-3xl flex items-center justify-center shadow-2xl shadow-brand-200 group-hover:rotate-6 transition-transform">
+                  <MessageSquare size={36} />
                 </div>
                 <div className="text-left">
-                  <p className="text-sm text-slate-500 font-bold uppercase tracking-widest">WhatsApp (Primary)</p>
-                  <p className="text-xl font-bold text-slate-900">+91 76763 94923</p>
+                  <p className="text-xs text-brand-600 font-black uppercase tracking-[0.2em] mb-1">WhatsApp (Primary)</p>
+                  <p className="text-2xl font-display font-bold text-slate-900">+91 76763 94923</p>
                 </div>
               </motion.a>
               
               <motion.a 
-                whileHover={{ scale: 1.05, y: -5 }}
+                whileHover={{ scale: 1.02, y: -5 }}
                 href="mailto:shivanagouda.012@gmail.com" 
-                className="flex items-center gap-6 p-6 rounded-3xl bg-slate-50 border border-slate-100 group hover:bg-slate-100 transition-all w-full md:w-auto min-w-[320px]"
+                className="flex items-center gap-8 p-8 rounded-[2.5rem] bg-slate-50/50 border border-slate-100 group hover:bg-white hover:shadow-2xl hover:shadow-slate-200/40 transition-all"
               >
-                <div className="w-16 h-16 bg-slate-900 text-white rounded-2xl flex items-center justify-center shadow-lg">
-                  <Mail size={32} />
+                <div className="w-20 h-20 bg-slate-900 text-white rounded-3xl flex items-center justify-center shadow-2xl group-hover:-rotate-6 transition-transform">
+                  <Mail size={36} />
                 </div>
                 <div className="text-left">
-                  <p className="text-sm text-slate-500 font-bold uppercase tracking-widest">Email Address</p>
-                  <p className="text-xl font-bold text-slate-900">shivanagouda.012@gmail.com</p>
+                  <p className="text-xs text-slate-500 font-black uppercase tracking-[0.2em] mb-1">Email Address</p>
+                  <p className="text-2xl font-display font-bold text-slate-900">shivanagouda.012@gmail.com</p>
                 </div>
               </motion.a>
             </div>
 
             <motion.a 
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: "0 25px 50px -12px rgba(37, 99, 235, 0.5)"
+              }}
               whileTap={{ scale: 0.95 }}
               href={WHATSAPP_LINK} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-brand-600 text-white px-12 py-6 rounded-2xl font-bold text-2xl hover:bg-brand-700 transition-all shadow-2xl shadow-brand-200"
+              className="inline-flex items-center gap-4 bg-brand-600 text-white px-16 py-8 rounded-[2rem] font-black text-2xl hover:bg-brand-700 transition-all shadow-2xl shadow-brand-200"
             >
-              Start Your Project Now
-              <ArrowRight size={28} />
+              START YOUR PROJECT NOW
+              <ArrowRight size={32} className="animate-bounce-x" />
             </motion.a>
           </motion.div>
         </div>
@@ -828,6 +934,7 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
+        <InfoTicker />
         <Services />
         <WhyUs />
         <WebsiteDetails />

@@ -30,10 +30,29 @@
 
 @layer utilities {
   .glass {
-    @apply bg-white/80 backdrop-blur-md border border-white/20;
+    @apply bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)];
   }
   
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-600 via-blue-500 to-brand-400 bg-[length:200%_auto];
+  }
+
+  .animate-gradient {
+    animation: gradient 3s linear infinite;
+  }
+
+  .animate-bounce-x {
+    animation: bounce-x 1s infinite;
+  }
+
+  @keyframes bounce-x {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
+  }
+
+  @keyframes gradient {
+    0% { background-position: 0% center; }
+    50% { background-position: 100% center; }
+    100% { background-position: 0% center; }
   }
 }
