@@ -846,7 +846,7 @@ const Contact = () => {
               
               <motion.a 
                 whileHover={{ scale: 1.02, y: -5 }}
-                href="mailto:shivanagouda.012@gmail.com" 
+                href="mailto:support@webnixo.in" 
                 className="flex items-center gap-8 p-8 rounded-[2.5rem] bg-slate-50/50 border border-slate-100 group hover:bg-white hover:shadow-2xl hover:shadow-slate-200/40 transition-all"
               >
                 <div className="w-20 h-20 bg-slate-900 text-white rounded-3xl flex items-center justify-center shadow-2xl group-hover:-rotate-6 transition-transform">
@@ -854,7 +854,7 @@ const Contact = () => {
                 </div>
                 <div className="text-left">
                   <p className="text-xs text-slate-500 font-black uppercase tracking-[0.2em] mb-1">Email Address</p>
-                  <p className="text-2xl font-display font-bold text-slate-900">shivanagouda.012@gmail.com</p>
+                  <p className="text-2xl font-display font-bold text-slate-900">support@webnixo.in</p>
                 </div>
               </motion.a>
             </div>
@@ -900,7 +900,7 @@ const Footer = () => {
             <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">
               WhatsApp
             </a>
-            <a href="mailto:shivanagouda.012@gmail.com" className="text-slate-400 hover:text-white transition-colors">
+            <a href="mailto:support@webnixo.in" className="text-slate-400 hover:text-white transition-colors">
               Email
             </a>
           </div>
