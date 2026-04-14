@@ -658,6 +658,31 @@ const CEOSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
         >
+          {/* Founder Image */}
+          <motion.div
+            animate={{ 
+              y: [0, -15, 0],
+              rotate: [0, 2, 0]
+            }}
+            transition={{ 
+              duration: 5, 
+              repeat: Infinity, 
+              ease: "easeInOut" 
+            }}
+            className="mb-12 relative inline-block"
+          >
+            <div className="absolute -inset-4 bg-brand-600/20 rounded-full blur-2xl animate-pulse" />
+            <img 
+              src="https://lh3.googleusercontent.com/d/1HVLiBV8sWqgJTyOeuUu5XrwKVafUcr8I" 
+              alt="Shivanagouda Patil" 
+              className="w-40 h-40 lg:w-56 lg:h-56 rounded-full object-cover border-4 border-brand-600/30 shadow-2xl relative z-10"
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute -bottom-2 -right-2 bg-brand-600 text-white p-3 rounded-2xl shadow-xl z-20">
+              <Award size={24} />
+            </div>
+          </motion.div>
+
           <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-brand-500/10 text-brand-400 text-xs font-black mb-12 border border-brand-500/20 tracking-[0.5em] uppercase">
             <span className="w-2 h-2 bg-brand-500 rounded-full animate-ping" />
             The Visionary
